@@ -1,25 +1,33 @@
 {
-  "name": "o-complex",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "next": "15.3.3"
-  },
-  "devDependencies": {
-    "typescript": "^5",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "15.3.3",
-    "@eslint/eslintrc": "^3"
-  }
+	"name": "o-complex",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint",
+		"stylelint:scss": "stylelint \"app/**/*.scss\" --fix"
+	},
+	"dependencies": {
+		"next": "15.3.3",
+		"react": "^19.0.0",
+		"react-dom": "^19.0.0"
+	},
+	"devDependencies": {
+		"@eslint/eslintrc": "^3",
+		"@types/node": "^20",
+		"@types/react": "^19",
+		"@types/react-dom": "^19",
+		"eslint": "^9",
+		"eslint-config-next": "15.3.3",
+		"sass": "^1.89.1",
+		"stylelint": "^16.20.0",
+		"stylelint-config-recess-order": "^6.0.0",
+		"stylelint-config-standard": "^38.0.0",
+		"stylelint-config-standard-scss": "^15.0.1",
+		"stylelint-order": "^7.0.0",
+		"stylelint-scss": "^6.12.0",
+		"typescript": "^5"
+	}
 }
