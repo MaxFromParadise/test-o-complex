@@ -1,10 +1,12 @@
 import Image from 'next/image';
+import PageTitle from './components/PageTitle/PageTitle';
 import styles from './page.module.scss';
 
 export default function Home() {
 	return (
 		<div className={styles.page}>
 			<main className={styles.main}>
+				<PageTitle>тестовое задание</PageTitle>
 				<Image
 					className={styles.logo}
 					src='/next.svg'

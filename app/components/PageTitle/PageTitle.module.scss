@@ -1,0 +1,10 @@
+.title {
+	width: 100%;
+	max-width: 1440px;
+	padding: 1rem 4.625rem;
+	font-size: clamp(2.5rem, 1.2453rem + 5.283vw, 6rem);
+	color: var(--gray-light-color);
+	text-align: center;
+	background: #777;
+	border-radius: 0.9375rem;
+}
