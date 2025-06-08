@@ -10,8 +10,8 @@ interface Props extends HTMLAttributes<HTMLHeadingElement> {
 const PageTitle = ({ children, ...rest }: Props) => {
 	return (
 		<h1
-			className={styles.title}
 			{...rest}
+			className={`${styles.title}${rest.className ? ' ' + rest.className : ''}`}
 		>
 			{children}
 		</h1>
