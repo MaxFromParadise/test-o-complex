@@ -1,0 +1,27 @@
+.review {
+	width: 100%;
+	height: 100%;
+	padding: 1.25rem 1.625rem 1.625rem;
+	background: var(--primary-color);
+	border-radius: 0.9375rem;
+
+	h1 {
+		margin-bottom: 0.5em;
+		font-size: clamp(1.375rem, 1.2585rem + 0.4906vw, 1.7rem);
+		font-weight: 500;
+		color: var(--black-color);
+	}
+
+	h2 {
+		margin-bottom: 0.5em;
+		font-size: clamp(1.125rem, 1.0623rem + 0.2642vw, 1.3rem);
+		font-weight: 400;
+	}
+
+	p {
+		margin-bottom: 0.5em;
+		font-size: clamp(1.125rem, 0.9906rem + 0.566vw, 1.5rem);
+		font-weight: 400;
+		color: var(--black-color);
+	}
+}

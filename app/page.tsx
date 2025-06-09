@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import PageTitle from './components/PageTitle/PageTitle';
+import ReviewItem from './components/ReviewItem/ReviewItem';
 import styles from './page.module.scss';
 
 export default function Home() {
@@ -7,6 +8,7 @@ export default function Home() {
 		<div className={styles.page}>
 			<main className={styles.main}>
 				<PageTitle>тестовое задание</PageTitle>
+				<ReviewItem review={{ id: 1, text: '<h1>Отличный магазин!</h1><p>Есть небольшие проблемы с упаковкой, но в целом нормально.</p><p>Есть небольшие проблемы с упаковкой, но в целом нормально.</p>' }} />
 				<Image
 					className={styles.logo}
 					src='/next.svg'
