@@ -4,11 +4,12 @@
 	font-size: 2.25rem;
 	font-weight: 400;
 	color: var(--gray-light-color);
+	cursor: pointer;
 	background: var(--secondary-color);
 	border: none;
 	border-radius: 0.9375rem;
-	cursor: pointer;
 	transition: background 0.3s ease 0s;
+
 	&:hover {
 		background: var(--black-color);
 	}
