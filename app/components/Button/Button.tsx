@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { HTMLAttributes, ReactNode } from 'react';
+import { HTMLAttributes, JSX, ReactNode } from 'react';
 import styles from './Button.module.scss';
 
 /**
@@ -12,7 +12,7 @@ interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
 	type?: 'button' | 'submit' | 'reset';
 }
 
-const Button = ({ children, type = 'button', className, ...rest }: ButtonProps) => {
+const Button = ({ children, type = 'button', className, ...rest }: ButtonProps): JSX.Element => {
 	return (
 		<button
 			type={type}
