@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { HTMLAttributes, ReactNode } from 'react';
+import { HTMLAttributes, JSX, ReactNode } from 'react';
 import styles from './PageTitle.module.scss';
 
 /**
@@ -10,7 +10,7 @@ import styles from './PageTitle.module.scss';
 interface PageTitleProps extends HTMLAttributes<HTMLHeadingElement> {
 	children: ReactNode;
 }
-const PageTitle = ({ children, className, ...rest }: PageTitleProps) => {
+const PageTitle = ({ children, className, ...rest }: PageTitleProps): JSX.Element => {
 	return (
 		<h1
 			{...rest}
