@@ -7,4 +7,9 @@
 	background: var(--secondary-color);
 	border: none;
 	border-radius: 0.9375rem;
+	cursor: pointer;
+	transition: background 0.3s ease 0s;
+	&:hover {
+		background: var(--black-color);
+	}
 }
