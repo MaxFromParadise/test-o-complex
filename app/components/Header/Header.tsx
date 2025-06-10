@@ -1,8 +1,8 @@
 import PageTitle from '../PageTitle/PageTitle';
-
+import styles from './Header.module.scss';
 const Header = () => {
 	return (
-		<header>
+		<header className={styles.header}>
 			<PageTitle>тестовое задание</PageTitle>
 		</header>
 	);
