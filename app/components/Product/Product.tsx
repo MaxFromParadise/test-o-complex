@@ -12,6 +12,27 @@ interface ProductProps extends HTMLAttributes<HTMLDivElement> {
 	info: IProduct;
 }
 
+/**
+ * Product component displays a product card with an option to add the item to the cart.
+ *
+ * Features:
+ * - Shows product image, title, description, and price.
+ * - Provides quantity control interface:
+ *   - Displays a "Buy" button when the quantity is 0 and input is not focused.
+ *   - After clicking "Buy", switches to a counter with +/− buttons and an input field.
+ * - Input accepts only numeric values. Clears when focused if the value is 0.
+ * - Smooth transitions between "Buy" button and counter using Framer Motion.
+ *
+ * Technical details:
+ * - Memoized with `memo` to prevent unnecessary re-renders.
+ * - Uses modular SCSS styles and `clsx` for class management.
+ * - Integrated with Next.js via `next/image` for optimized image loading.
+ *
+ * Props:
+ * - `info` (IProduct): Object containing product information.
+ * - All other HTML attributes are spread to the root `<article>`.
+ */
+
 const Product = ({ info, className, ...rest }: ProductProps): JSX.Element => {
 	const [quantity, setQuantity] = useState<number>(0);
 	const [inputValue, setInputValue] = useState<string>('0');
