@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Cart from './components/Cart/Cart';
 import PageTitle from './components/PageTitle/PageTitle';
 import Product from './components/Product/Product';
 import ReviewItem from './components/ReviewItem/ReviewItem';
@@ -15,6 +16,12 @@ export default function Home() {
 					<Product info={{ id: 2, image_url: 'https://picsum.photos/400/300?random=2', title: 'Huawei Телевизор Pro', description: 'Отличный технический продукт с отличной производительностью', price: 30651 }}></Product>
 					<Product info={{ id: 3, image_url: 'https://picsum.photos/400/300?random=3', title: 'Huawei Планшет Max', description: 'Отличный мультимедийный продукт с высокой производительностью', price: 37244 }}></Product>
 				</div>
+				<Cart
+					products={[
+						{ id: 1, image_url: 'https://placehold.co/400x300/EEE/31343C?font=raleway&text=Product+1', title: 'Bose Смартфон Premium', description: 'Отличный мультимедийный продукт с отличной производительностью', price: 49294 },
+						{ id: 2, image_url: 'https://picsum.photos/400/300?random=2', title: 'Huawei Телевизор Pro', description: 'Отличный технический продукт с отличной производительностью', price: 30651 },
+					]}
+				></Cart>
 				<Image
 					className={styles.logo}
 					src='/next.svg'
