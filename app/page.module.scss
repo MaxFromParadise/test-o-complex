@@ -1,21 +1,4 @@
 .page {
 	padding: 3.4375rem 0;
 	background: var(--secondary-color);
-
-	&__container {
-		width: 100%;
-		max-width: 1010px;
-		padding: 0 0.9375rem;
-		margin: 0 auto;
-	}
-}
-
-.reviews {
-	margin-bottom: 13rem;
-	.page__container {
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		gap: 2.125rem;
-		justify-content: center;
-	}
 }

@@ -10,12 +10,16 @@
 		"stylelint:scss": "stylelint \"app/**/*.scss\" --fix"
 	},
 	"dependencies": {
+		"@reduxjs/toolkit": "^2.8.2",
 		"clsx": "^2.1.1",
 		"motion": "^12.16.0",
 		"next": "15.3.3",
+		"next-redux-wrapper": "^8.1.0",
 		"react": "^19.0.0",
 		"react-dom": "^19.0.0",
 		"react-imask": "^7.6.1",
+		"react-redux": "^9.2.0",
+		"react-window": "^1.8.11",
 		"xss": "^1.0.15"
 	},
 	"devDependencies": {
@@ -23,6 +27,7 @@
 		"@types/node": "^20",
 		"@types/react": "^19",
 		"@types/react-dom": "^19",
+		"@types/react-window": "^1.8.8",
 		"eslint": "^9",
 		"eslint-config-next": "15.3.3",
 		"sass": "^1.89.1",

@@ -1,41 +1,46 @@
 'use client';
-import { IProduct } from '@/app/types';
-import { JSX, useState } from 'react';
+
+import { RootState } from '@/app/store';
+import { JSX, memo, useCallback, useMemo, useState } from 'react';
 import { IMaskInput } from 'react-imask';
+import { useSelector } from 'react-redux';
 import Button from '../Button/Button';
 import styles from './Cart.module.scss';
 
-interface CartProps {
-	products: IProduct[];
-}
+/**
+ * Cart component displays the list of items in the cart and provides
+ * a form to place an order using a masked phone number input.
+ */
 
-const Cart = ({ products }: CartProps): JSX.Element => {
+const Cart = (): JSX.Element => {
+	const cart = useSelector((state: RootState) => state.cart.cart);
 	const [phone, setPhone] = useState('');
 
-	const handleSubmit = (e: React.FormEvent) => {
+	const handleSubmit = useCallback((e: React.FormEvent) => {
 		e.preventDefault();
 		setPhone('');
-	};
+	}, []);
+
+	const renderCartItems = useMemo(() => {
+		return cart.map((product) => (
+			<li
+				key={product.id}
+				className={styles.cart__item}
+			>
+				<div className={styles.cart__itemTitle}>{product.title}</div>
+				<div className={styles.cart__itemCount}>x{product.quantity}</div>
+				<div className={styles.cart__itemPrice}>₽ {new Intl.NumberFormat('ru-RU').format(product.price * product.quantity)}</div>
+			</li>
+		));
+	}, [cart]);
+
 	return (
 		<section className={styles.cart}>
 			<h2 className={styles.cart__title}>Добавленные товары</h2>
+
 			<form onSubmit={handleSubmit}>
-				{products.length > 0 ? (
-					<ul className={styles.cart__list}>
-						{products.map((product) => (
-							<li
-								key={product.id}
-								className={styles.cart__item}
-							>
-								<div className={styles.cart__itemTitle}>{product.title}</div>
-								<div className={styles.cart__itemCount}>x3</div>
-								<div className={styles.cart__itemPrice}>₽ {new Intl.NumberFormat('ru-RU').format(product.price * 3)}</div>
-							</li>
-						))}
-					</ul>
-				) : (
-					<div>Корзина пуста</div>
-				)}
+				<ul className={styles.cart__list}>{cart.length > 0 ? renderCartItems : 'Корзина пуста'}</ul>
+
 				<div className={styles.cart__actions}>
 					<IMaskInput
 						mask='+7 (000) 000-00-00'
@@ -57,4 +62,4 @@ const Cart = ({ products }: CartProps): JSX.Element => {
 	);
 };
 
-export default Cart;
+export default memo(Cart);

@@ -1,10 +1,12 @@
 'use client';
 
+import { addOrUpdateProduct } from '@/app/store/slices/cartSlice';
 import { IProduct } from '@/app/types';
 import clsx from 'clsx';
 import { AnimatePresence, motion } from 'motion/react';
 import Image from 'next/image';
-import { HTMLAttributes, JSX, memo, useCallback, useState } from 'react';
+import { HTMLAttributes, JSX, memo, useCallback, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import Button from '../Button/Button';
 import styles from './Product.module.scss';
 
@@ -12,35 +14,20 @@ interface ProductProps extends HTMLAttributes<HTMLDivElement> {
 	info: IProduct;
 }
 
-/**
- * Product component displays a product card with an option to add the item to the cart.
- *
- * Features:
- * - Shows product image, title, description, and price.
- * - Provides quantity control interface:
- *   - Displays a "Buy" button when the quantity is 0 and input is not focused.
- *   - After clicking "Buy", switches to a counter with +/− buttons and an input field.
- * - Input accepts only numeric values. Clears when focused if the value is 0.
- * - Smooth transitions between "Buy" button and counter using Framer Motion.
- *
- * Technical details:
- * - Memoized with `memo` to prevent unnecessary re-renders.
- * - Uses modular SCSS styles and `clsx` for class management.
- * - Integrated with Next.js via `next/image` for optimized image loading.
- *
- * Props:
- * - `info` (IProduct): Object containing product information.
- * - All other HTML attributes are spread to the root `<article>`.
- */
-
 const Product = ({ info, className, ...rest }: ProductProps): JSX.Element => {
 	const [quantity, setQuantity] = useState<number>(0);
 	const [inputValue, setInputValue] = useState<string>('0');
 	const [isInputFocused, setIsInputFocused] = useState<boolean>(false);
 
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(addOrUpdateProduct({ ...info, quantity }));
+	}, [dispatch, info, quantity]);
+
 	const handleIncrement = useCallback(() => {
 		setQuantity((prev) => {
-			const next = prev + 1;
+			const next = Math.min(prev + 1, 100);
 			setInputValue(String(next));
 			return next;
 		});
@@ -66,7 +53,7 @@ const Product = ({ info, className, ...rest }: ProductProps): JSX.Element => {
 
 	const handleInputBlur = () => {
 		setIsInputFocused(false);
-		const parsed = parseInt(inputValue);
+		const parsed = Math.min(parseInt(inputValue), 100);
 		const safeValue = isNaN(parsed) ? 0 : parsed;
 		setQuantity(safeValue);
 		setInputValue(String(safeValue));
@@ -76,8 +63,9 @@ const Product = ({ info, className, ...rest }: ProductProps): JSX.Element => {
 		const val = e.target.value;
 		if (/^\d*$/.test(val)) {
 			setInputValue(val);
-			const num = parseInt(val);
-			setQuantity(isNaN(num) ? 0 : num);
+			const num = Math.min(parseInt(val), 100);
+			const safeNum = isNaN(num) ? 0 : num;
+			setQuantity(safeNum);
 		}
 	};
 
