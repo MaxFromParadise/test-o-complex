@@ -1,25 +1,65 @@
 'use client';
 
 import { RootState } from '@/app/store';
+import { clearCart } from '@/app/store/slices/cartSlice';
 import { JSX, memo, useCallback, useMemo, useState } from 'react';
 import { IMaskInput } from 'react-imask';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Button from '../Button/Button';
 import styles from './Cart.module.scss';
 
-/**
- * Cart component displays the list of items in the cart and provides
- * a form to place an order using a masked phone number input.
- */
-
 const Cart = (): JSX.Element => {
+	const dispatch = useDispatch();
 	const cart = useSelector((state: RootState) => state.cart.cart);
 	const [phone, setPhone] = useState('');
+	const [error, setError] = useState('');
 
-	const handleSubmit = useCallback((e: React.FormEvent) => {
-		e.preventDefault();
-		setPhone('');
-	}, []);
+	const isPhoneValid = (phone: string) => {
+		return /^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/.test(phone);
+	};
+
+	const handleSubmit = useCallback(
+		async (e: React.FormEvent) => {
+			e.preventDefault();
+			setError('');
+
+			if (!isPhoneValid(phone)) {
+				setError('Номер телефона заполнен неверно');
+				return;
+			}
+
+			const digitsOnlyPhone = phone.replace(/\D/g, '');
+
+			const orderData = {
+				phone: digitsOnlyPhone,
+				cart: cart.map((item) => ({
+					id: item.id,
+					quantity: item.quantity,
+				})),
+			};
+
+			try {
+				const response = await fetch('http://o-complex.com:1337/order', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify(orderData),
+				});
+				const data = await response.json();
+
+				if (data.success === 1) {
+					setError('Заказ успешно отправлен');
+					setPhone('');
+					dispatch(clearCart());
+				} else {
+					setError('Ошибка при отправке заказа');
+				}
+			} catch (err) {
+				console.error(err);
+				setError('Произошла ошибка при отправке запроса');
+			}
+		},
+		[phone, cart]
+	);
 
 	const renderCartItems = useMemo(() => {
 		return cart.map((product) => (
@@ -57,6 +97,7 @@ const Cart = (): JSX.Element => {
 					/>
 					<Button type='submit'>заказать</Button>
 				</div>
+				<label className={styles.cart__error}>{error}</label>
 			</form>
 		</section>
 	);
