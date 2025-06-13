@@ -1,15 +1,13 @@
 'use client';
 
 import { RootState } from '@/app/store';
-import { clearCart } from '@/app/store/slices/cartSlice';
 import { JSX, memo, useCallback, useMemo, useState } from 'react';
 import { IMaskInput } from 'react-imask';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Button from '../Button/Button';
 import styles from './Cart.module.scss';
 
 const Cart = (): JSX.Element => {
-	const dispatch = useDispatch();
 	const cart = useSelector((state: RootState) => state.cart.cart);
 	const [phone, setPhone] = useState('');
 	const [error, setError] = useState('');
@@ -49,7 +47,6 @@ const Cart = (): JSX.Element => {
 				if (data.success === 1) {
 					setError('Заказ успешно отправлен');
 					setPhone('');
-					dispatch(clearCart());
 				} else {
 					setError('Ошибка при отправке заказа');
 				}
